@@ -1,0 +1,288 @@
+// Code Developed by Team Excalibur's.
+//Mannish.S
+//Madhumithaa.S
+//Hariharan.R
+//Prethikaa.M
+
+
+
+// Declaring the pins in Aduriuno Board for LED'S.
+//Declaring Global Varibles begining.
+int led1 = 6;
+int led2 = 9;
+int led3 = 11;
+int led4 = 10;
+int led5 = 5;
+
+// Declaring the pins in Aduriuno Board Light resistance diode (LDR).
+
+int ldr = A5;
+
+//Declaring the pins in Aduriuno Board for IR Sensors.
+
+int ir1 = A0;
+int ir2 = A1;
+int ir3 = A2;
+int ir4 = A3;
+int ir5 = A4;
+
+//Declaring variables to find out how much the value costs with and without this method.
+ 
+int act; // Variable to calculate Current method
+int totalcount;
+int totalsave;
+float Expenditure;
+float TotalExpenditure;
+float ExpenditureSaved;
+float totalSavecount;
+float totalvalue; //Variable to find the Amount of money Spent in current Implentation .
+float moneysaved; //Variable to find the Amount of money saved.
+float billsave;
+
+//Declaring Global Varibles End.
+
+void setup() 
+
+{
+  
+  Serial.begin (9600);
+  
+  // Input and output Pins.
+  //LED pins.
+  
+  pinMode (led1,OUTPUT);
+  pinMode (led2,OUTPUT);
+  pinMode (led3,OUTPUT);
+  pinMode (led4,OUTPUT);
+  pinMode (led5,OUTPUT);
+  
+  //LDR Pins.
+  
+  pinMode (ldr,INPUT);
+  
+  //IR Sensors Pins.
+  
+  pinMode (ir1,INPUT);
+  pinMode (ir2,INPUT);
+  pinMode (ir3,INPUT);
+  pinMode (ir4,INPUT);
+  pinMode (ir5,INPUT);
+  
+}
+
+void loop() 
+
+{ 
+  
+  int count=0;
+  int savecount=0;
+  delay(1000);
+  Serial.print("Next Set:");
+  Serial.print("\n ");
+  Serial.print("\tLDR Value :");
+  Serial.println(analogRead(A5));                 // Printing LDR Value.
+  int ldrStatus = analogRead (ldr);               // Storing LDR Value in ldrStatus.
+  int sensorValue = digitalRead(led1);            // Variable to Find if LED1 is On or Off.
+  int sensorValue1 = digitalRead(led2);           // Variable to Find if LED2 is On or Off.
+  int sensorValue2= digitalRead(led3);            // Variable to Find if LED3 is On or Off.
+  int sensorValue3 = digitalRead(led4);           // Variable to Find if LED4 is On or Off.
+  int sensorValue4 = digitalRead(led5);           // Variable to Find if LED5 is On or Off.
+    
+    //To Turn OFF the Lights when the Environment is Lit LDR Resistance less than Ambinet Light.(In this room > 200). 
+    
+    if (ldrStatus >200)
+    
+     {
+         digitalWrite(led1, LOW);                  //Sets Low.
+         digitalWrite(led2, LOW);                  //Sets Low.
+         digitalWrite(led3, LOW);                  //Sets Low.
+         digitalWrite(led4, LOW);                  //Sets Low.
+         digitalWrite(led5, LOW);                  //Sets Low.
+         Serial.print("   Ambient Light  ^-^  ");
+         Serial.print("\n");
+         Serial.print("--------------------------------------------------------------------------------------");
+         delay(2000);
+         
+       }
+      
+      //To Turn ON the Lights when the Environment is dark LDR Resistance less than Ambinet Light.(In this room < 200).   
+    
+      else if(ldrStatus < 200)
+      
+       {
+       digitalWrite(led1, HIGH);
+       analogWrite(led1,255/5);
+       
+       Serial.print("\tLED: ON:");
+       Serial.println(sensorValue);
+        
+       digitalWrite(led2, HIGH);
+       analogWrite(led2,255/5);
+       
+       Serial.print("\tLED1: ON:"); 
+       Serial.println(sensorValue1);
+       
+       digitalWrite(led3, HIGH);
+       analogWrite(led3,255/5);    
+       
+       Serial.print("\tLED2: ON:"); 
+       Serial.println(sensorValue2);
+       
+       digitalWrite(led4, HIGH);
+       analogWrite(led4,255/5);    
+       
+       Serial.print("\tLED3: ON:");
+       Serial.println(sensorValue3);
+       
+       digitalWrite(led5, HIGH);
+       analogWrite(led5,255/5);
+       
+       Serial.print("\tLED4: ON:");
+       Serial.println(sensorValue4);
+      
+      
+       
+        if (analogRead(A0) < 1000)           
+               
+               {
+               
+                digitalWrite(led1,HIGH);
+                analogWrite(led1,255);
+                count=count+1;     
+                 act+=1;  
+                 
+               }
+                
+            else 
+               
+                {
+                
+                  digitalWrite(led1,LOW);
+                  analogWrite(led1,255/5);
+                  savecount=savecount+1;
+                  act+=1;   
+                  
+                }
+       
+       
+       if (analogRead(A1) < 1000)          
+               {
+                
+                digitalWrite(led2,HIGH);
+                analogWrite(led2,255);
+                count=count+1;    
+                act+=1;     
+                
+               } 
+            else
+             
+                {
+            
+                  digitalWrite(led2,LOW);
+                  analogWrite(led2,255/5);
+                  savecount=savecount+1;
+                  act+=1;                 
+                    
+                }
+          
+          if (analogRead(A2) < 1000)          
+               {
+                
+                digitalWrite(led3,HIGH);
+                analogWrite(led3,255);
+                count=count+1;
+                act+=1;  
+                
+               } 
+            else 
+                {
+                  
+                   digitalWrite(led3,LOW);
+                   analogWrite(led3,255/5);
+                   savecount=savecount+1;
+                   act+=1;
+                     
+                }
+                
+           if (analogRead(A3) < 1000)           
+               
+               {
+                
+                digitalWrite(led4,HIGH);
+                analogWrite(led4,255);
+                count=count+1;  
+                act+=1;  
+                  
+               } 
+          
+            else 
+            
+                {
+                
+                  digitalWrite(led4,LOW);
+                  analogWrite(led4,255/5); 
+                  savecount=savecount+1;
+                  act+=1;  
+                  
+                }
+            if (analogRead(A4) < 1000)                   
+            {
+               
+                digitalWrite(led5,HIGH);
+                analogWrite(led5,255); 
+                count=count+1; 
+                act+=1; 
+               
+               } 
+               
+            else 
+               
+               {
+                
+                  digitalWrite(led5,HIGH);
+                   analogWrite(led5,255/5);
+                   savecount=savecount+1; 
+                   act+=1;  
+                  
+              
+                
+                }
+              totalcount=totalcount+count;
+              totalSavecount=totalSavecount+savecount;
+              //totalSave=0.10*savecount;
+              Expenditure=0.9*totalcount;                     //5v is number of units , 0.9 is the number of watts Expenditure. 
+              ExpenditureSaved=0.5*savecount;                 //3.3v is number of units , 0.9 is the number of watts Expenditure. 
+              TotalExpenditure=TotalExpenditure+Expenditure;
+              totalvalue=(act)*5;  // 1kwh=5 Rs , data from Gov website.
+              moneysaved+=(ExpenditureSaved)*5;
+              
+              Serial.print("\n\t Count This Loop: ");
+              Serial.println(count);
+              
+              Serial.print("\t TotalCount: "); 
+              Serial.println(totalcount);
+              
+              Serial.print("\t Save This Loop: ");
+              Serial.println(savecount);
+              
+              Serial.print("\t Total Save : ");
+              Serial.println(totalsave);
+              
+              Serial.print("\t Expentiture of watts:");
+              Serial.println(Expenditure);
+              
+              Serial.print("\t Expentiture of watts Saved: ");
+              Serial.println(ExpenditureSaved);
+              
+              Serial.print("\t Cost Without this Method: ");
+              Serial.println(totalvalue);
+              
+              Serial.print("\t Cost Saved With this Method this: ");
+              Serial.println(moneysaved);
+                            
+              
+     }
+     
+           
+
+      }
